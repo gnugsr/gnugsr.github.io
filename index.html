@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | 구세린</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00fff9;
+            --neon-pink: #ff006e;
+            --neon-purple: #8338ec;
+            --neon-yellow: #ffbe0b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #05070f;
+            --card-bg: rgba(15, 20, 45, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--neon-cyan);
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥐</text></svg>') 16 16, auto;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--neon-cyan) 1px, transparent 1px),
+                linear-gradient(90deg, var(--neon-cyan) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.05;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Glowing orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-pink);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-purple);
+            top: 50%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--neon-cyan);
+            bottom: 15%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header with glitch effect */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-top: 60px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            position: relative;
+            display: inline-block;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 
+                    0 0 10px var(--neon-cyan),
+                    0 0 20px var(--neon-cyan),
+                    0 0 30px var(--neon-cyan),
+                    0 0 40px var(--neon-pink);
+            }
+            to {
+                text-shadow: 
+                    0 0 20px var(--neon-cyan),
+                    0 0 30px var(--neon-cyan),
+                    0 0 40px var(--neon-cyan),
+                    0 0 70px var(--neon-pink),
+                    0 0 80px var(--neon-pink);
+            }
+        }
+
+        h1::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            top: -2px;
+            color: var(--neon-pink);
+            z-index: -1;
+            animation: glitch1 0.3s infinite;
+        }
+
+        h1::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            color: var(--neon-purple);
+            z-index: -2;
+            animation: glitch2 0.3s infinite;
+        }
+
+        @keyframes glitch1 {
+            0%, 100% { clip-path: inset(0 0 0 0); }
+            20% { clip-path: inset(80% 0 5% 0); }
+            40% { clip-path: inset(20% 0 60% 0); }
+            60% { clip-path: inset(50% 0 30% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+        }
+
+        @keyframes glitch2 {
+            0%, 100% { clip-path: inset(0 0 0 0); }
+            25% { clip-path: inset(30% 0 50% 0); }
+            50% { clip-path: inset(70% 0 10% 0); }
+            75% { clip-path: inset(5% 0 80% 0); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            color: var(--neon-yellow);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Profile Section */
+        .profile-section {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .avatar-container {
+            width: 240px;
+            height: 280px;
+            position: relative;
+            animation: fadeInScale 1s ease-out 0.8s backwards;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px var(--neon-cyan));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-yellow);
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px var(--neon-yellow);
+            animation: fadeInUp 1s ease-out 1s backwards;
+        }
+
+        .profile-intro {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 1.2s backwards;
+        }
+
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+            animation: fadeInUp 1s ease-out 1.2s backwards;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 255, 249, 0.2);
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 300;
+        }
+
+        .profile-value {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            padding: 12px 30px;
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥐</text></svg>') 16 16, pointer;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        nav a:hover::before {
+            left: 0;
+        }
+
+        /* Project grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-purple);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥐</text></svg>') 16 16, pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple), var(--neon-yellow));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 255, 249, 0.3);
+        }
+
+        .project-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--neon-pink);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            line-height: 1;
+        }
+
+        .project-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neon-yellow);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .project-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            background: rgba(0, 255, 249, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        /* Skills section */
+        .skills-section {
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.2), rgba(255, 0, 110, 0.2));
+            border: 2px solid var(--neon-purple);
+            padding: 20px 35px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.6s ease-out backwards;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥐</text></svg>') 16 16, pointer;
+        }
+
+        .skill-box:nth-child(1) { animation-delay: 0.1s; }
+        .skill-box:nth-child(2) { animation-delay: 0.2s; }
+        .skill-box:nth-child(3) { animation-delay: 0.3s; }
+        .skill-box:nth-child(4) { animation-delay: 0.4s; }
+        .skill-box:nth-child(5) { animation-delay: 0.5s; }
+        .skill-box:nth-child(6) { animation-delay: 0.6s; }
+        .skill-box:nth-child(7) { animation-delay: 0.7s; }
+        .skill-box:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .skill-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        .skill-box:hover::before {
+            left: 100%;
+        }
+
+        /* Contact section */
+        .contact-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9), rgba(5, 7, 15, 0.9));
+            border: 2px solid var(--neon-cyan);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 249, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .contact-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--neon-yellow);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            padding: 18px 50px;
+            background: transparent;
+            border: 3px solid var(--neon-pink);
+            color: var(--neon-pink);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🥐</text></svg>') 16 16, pointer;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .contact-btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 40px var(--neon-pink);
+        }
+
+        .contact-btn:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skill-box {
+                font-size: 1rem;
+                padding: 15px 25px;
+            }
+        }
+
+        /* Scanline effect */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 249, 0.02) 50%
+            );
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: scanlineMove 8s linear infinite;
+        }
+
+        @keyframes scanlineMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="scanline"></div>
+
+    <div class="container">
+        <header>
+            <h1 data-text="ABOUT ME">ABOUT ME</h1>
+            <div class="subtitle">CYBER • CREATIVE • FUTURE</div>
+            
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="avatar-container">
+                    <svg class="avatar" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Glow background -->
+                        <circle cx="100" cy="100" r="85" fill="url(#glowGradient)" opacity="0.3"/>
+                        
+                        <defs>
+                            <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--neon-cyan);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:var(--neon-purple);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="hairGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4a4a6a;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2d2d44;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="shirtGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Body/Shoulders -->
+                        <path d="M 50 160 Q 50 165, 55 170 L 55 220 Q 55 230, 65 235 L 135 235 Q 145 230, 145 220 L 145 170 Q 150 165, 150 160 Z" 
+                              fill="url(#shirtGradient)" stroke="var(--neon-cyan)" stroke-width="2"/>
+                        
+                        <!-- Shirt details - neon lines -->
+                        <line x1="100" y1="160" x2="100" y2="235" stroke="var(--neon-purple)" stroke-width="1" opacity="0.5"/>
+                        <path d="M 70 180 L 130 180" stroke="var(--neon-cyan)" stroke-width="1" opacity="0.3"/>
+                        <path d="M 70 200 L 130 200" stroke="var(--neon-cyan)" stroke-width="1" opacity="0.3"/>
+                        
+                        <!-- Collar -->
+                        <path d="M 85 160 L 80 170 L 85 175 L 100 168 L 115 175 L 120 170 L 115 160 Z" 
+                              fill="#0f1419" stroke="var(--neon-cyan)" stroke-width="1.5"/>
+                        
+                        <!-- Neck -->
+                        <path d="M 85 145 L 82 160 L 88 165 L 112 165 L 118 160 L 115 145 Z" fill="#ffd6ba"/>
+                        
+                        <!-- Neck shadow -->
+                        <ellipse cx="100" cy="155" rx="12" ry="3" fill="#000" opacity="0.1"/>
+                        
+                        <!-- Face base -->
+                        <ellipse cx="100" cy="105" rx="45" ry="50" fill="#ffe4d6"/>
+                        
+                        <!-- Ears -->
+                        <ellipse cx="58" cy="105" rx="8" ry="12" fill="#ffd6ba"/>
+                        <ellipse cx="142" cy="105" rx="8" ry="12" fill="#ffd6ba"/>
+                        <ellipse cx="60" cy="105" rx="4" ry="6" fill="#ffb89d" opacity="0.5"/>
+                        <ellipse cx="140" cy="105" rx="4" ry="6" fill="#ffb89d" opacity="0.5"/>
+                        
+                        <!-- Hair back (long hair) -->
+                        <ellipse cx="100" cy="90" rx="55" ry="45" fill="url(#hairGradient)"/>
+                        
+                        <!-- Long hair flowing down -->
+                        <path d="M 45 90 Q 40 120, 45 150 Q 48 175, 52 200 Q 54 215, 58 230 L 58 100 Z" fill="url(#hairGradient)"/>
+                        <path d="M 155 90 Q 160 120, 155 150 Q 152 175, 148 200 Q 146 215, 142 230 L 142 100 Z" fill="url(#hairGradient)"/>
+                        
+                        <!-- Hair strands -->
+                        <ellipse cx="65" cy="170" rx="12" ry="40" fill="url(#hairGradient)"/>
+                        <ellipse cx="80" cy="180" rx="10" ry="45" fill="url(#hairGradient)" opacity="0.8"/>
+                        <ellipse cx="120" cy="180" rx="10" ry="45" fill="url(#hairGradient)" opacity="0.8"/>
+                        <ellipse cx="135" cy="170" rx="12" ry="40" fill="url(#hairGradient)"/>
+                        
+                        <!-- Hair highlights -->
+                        <path d="M 70 150 Q 72 175, 73 200" stroke="var(--neon-purple)" stroke-width="1" opacity="0.3" fill="none"/>
+                        <path d="M 130 150 Q 128 175, 127 200" stroke="var(--neon-purple)" stroke-width="1" opacity="0.3" fill="none"/>
+                        
+                        <!-- Face front -->
+                        <ellipse cx="100" cy="105" rx="42" ry="48" fill="#ffe4d6"/>
+                        
+                        <!-- Bangs (앞머리) - more detailed and cute -->
+                        <path d="M 55 65 Q 60 55, 65 60 Q 68 70, 70 75 L 65 80 Q 62 75, 58 72 Z" fill="url(#hairGradient)"/>
+                        <path d="M 70 58 Q 75 50, 80 55 Q 82 68, 83 75 L 78 80 Q 76 72, 72 68 Z" fill="url(#hairGradient)"/>
+                        <path d="M 85 55 Q 90 48, 95 53 Q 96 67, 96 75 L 92 80 Q 91 70, 88 65 Z" fill="url(#hairGradient)"/>
+                        <path d="M 100 53 Q 105 47, 108 53 Q 108 67, 108 75 L 104 80 Q 103 68, 102 62 Z" fill="url(#hairGradient)"/>
+                        <path d="M 115 55 Q 120 48, 125 55 Q 125 68, 124 75 L 120 80 Q 119 70, 117 65 Z" fill="url(#hairGradient)"/>
+                        <path d="M 130 58 Q 135 50, 140 58 Q 139 70, 137 76 L 133 80 Q 132 72, 131 68 Z" fill="url(#hairGradient)"/>
+                        
+                        <!-- Hair sides framing face -->
+                        <path d="M 56 85 Q 52 95, 53 110 Q 54 125, 56 135 L 59 135 Q 58 120, 58 105 Z" fill="url(#hairGradient)"/>
+                        <path d="M 144 85 Q 148 95, 147 110 Q 146 125, 144 135 L 141 135 Q 142 120, 142 105 Z" fill="url(#hairGradient)"/>
+                        
+                        <!-- Eyebrows (cute thin arches) -->
+                        <path d="M 70 85 Q 80 82, 88 84" stroke="#8B7355" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 112 84 Q 120 82, 130 85" stroke="#8B7355" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Eyes (big and sparkly) -->
+                        <ellipse cx="79" cy="98" rx="10" ry="13" fill="#2d2d44"/>
+                        <ellipse cx="121" cy="98" rx="10" ry="13" fill="#2d2d44"/>
+                        
+                        <!-- Eye highlights -->
+                        <circle cx="82" cy="95" r="4" fill="var(--neon-cyan)"/>
+                        <circle cx="124" cy="95" r="4" fill="var(--neon-cyan)"/>
+                        <circle cx="84" cy="93" r="2" fill="#ffffff"/>
+                        <circle cx="126" cy="93" r="2" fill="#ffffff"/>
+                        <circle cx="77" cy="102" r="1.5" fill="#ffffff" opacity="0.6"/>
+                        <circle cx="119" cy="102" r="1.5" fill="#ffffff" opacity="0.6"/>
+                        
+                        <!-- Eyelashes -->
+                        <path d="M 72 92 Q 70 88, 68 90" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 75 90 Q 73 85, 71 87" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 86 92 Q 88 88, 90 90" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 83 90 Q 85 85, 87 87" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        
+                        <path d="M 114 92 Q 112 88, 110 90" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 117 90 Q 115 85, 113 87" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 128 92 Q 130 88, 132 90" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 125 90 Q 127 85, 129 87" stroke="#2d2d44" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Blush -->
+                        <ellipse cx="68" cy="115" rx="8" ry="5" fill="var(--neon-pink)" opacity="0.3"/>
+                        <ellipse cx="132" cy="115" rx="8" ry="5" fill="var(--neon-pink)" opacity="0.3"/>
+                        
+                        <!-- Cute small nose -->
+                        <ellipse cx="100" cy="112" rx="3" ry="2" fill="#ffc9b0" opacity="0.7"/>
+                        
+                        <!-- Smile (cute soft curve) -->
+                        <path d="M 85 125 Q 100 132, 115 125" stroke="var(--neon-pink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 88 125 Q 100 130, 112 125" stroke="#ff8fb0" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+                        
+                        <!-- Outer glow -->
+                        <circle cx="100" cy="105" r="70" fill="none" stroke="var(--neon-cyan)" stroke-width="1" opacity="0.2"/>
+                    </svg>
+                </div>
+                <h2 class="profile-name">안녕하세요 구세린입니다</h2>
+                <div class="profile-details">
+                    <div class="profile-item">
+                        <span class="profile-label">University</span>
+                        <span class="profile-value">경상국립대학교</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">Major</span>
+                        <span class="profile-value">기계융합공학과</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">Class of</span>
+                        <span class="profile-value">2023</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#projects">프로젝트</a>
+            <a href="#contact">연락</a>
+        </nav>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <span class="project-number">01</span>
+                    <h3>Neon Dreams</h3>
+                    <p>미래지향적인 UI/UX를 가진 인터랙티브 웹 애플리케이션. 사용자 경험을 혁신하는 사이버펑크 스타일의 대시보드입니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebGL</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-number">02</span>
+                    <h3>Quantum Interface</h3>
+                    <p>실시간 데이터 시각화와 AI 기반 인사이트를 제공하는 차세대 분석 플랫폼. 복잡한 데이터를 아름답게 표현합니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">D3.js</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-number">03</span>
+                    <h3>Digital Nexus</h3>
+                    <p>블록체인 기술을 활용한 탈중앙화 소셜 플랫폼. 사용자 프라이버시와 데이터 소유권을 최우선으로 합니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Solidity</span>
+                        <span class="tech-tag">Web3.js</span>
+                        <span class="tech-tag">IPFS</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-number">04</span>
+                    <h3>Synth Wave</h3>
+                    <p>실시간 협업이 가능한 음악 제작 도구. 웹 기반 신디사이저와 시퀀서로 누구나 음악을 만들 수 있습니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Web Audio</span>
+                        <span class="tech-tag">WebRTC</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-number">05</span>
+                    <h3>Holo Gallery</h3>
+                    <p>증강현실(AR)을 활용한 3D 아트 갤러리. 현실과 디지털 세계를 연결하는 새로운 전시 경험을 제공합니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">AR.js</span>
+                        <span class="tech-tag">A-Frame</span>
+                        <span class="tech-tag">TensorFlow</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-number">06</span>
+                    <h3>Neural Network</h3>
+                    <p>머신러닝 모델을 시각화하고 실험할 수 있는 교육용 플랫폼. AI 학습을 직관적이고 재미있게 만듭니다.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Canvas</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-box">React</div>
+                <div class="skill-box">Node.js</div>
+                <div class="skill-box">Python</div>
+                <div class="skill-box">AWS</div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>LET'S CONNECT</h2>
+            <p>다음 프로젝트를 함께 만들어갈 준비가 되어 있습니다</p>
+            <a href="mailto:gnugsr@gmail.com" class="contact-btn">Contact Me</a>
+        </section>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for orbs
+        document.addEventListener('mousemove', (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 20;
+                const xMove = (x - 0.5) * speed;
+                const yMove = (y - 0.5) * speed;
+                orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions)
